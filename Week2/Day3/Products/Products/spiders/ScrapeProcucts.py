@@ -6,10 +6,12 @@ class ProductSpider(scrapy.Spider):
     nextp = 0
     # brand = input('Enter the brand name you want to scrape: ')
 
-    start_urls = [
-              'https://www.daraz.pk/catalog/?q='
-              '{brand}'.format(brand='samsung'),
-    ]
+    def start_requests(self):
+        url = 'https://www.daraz.pk/catalog/'
+        brand = getattr(self, 'brand', None)
+        if brand is not None:
+            url = 'https://www.daraz.pk/catalog/?q={brand}'.format(brand=brand)
+        yield scrapy.Request(url, self.parse)
 
     def parse(self, response):
         for prod in response.css('section.products div.sku'):
