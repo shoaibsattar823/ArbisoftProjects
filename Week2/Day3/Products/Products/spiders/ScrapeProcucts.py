@@ -4,7 +4,6 @@ import scrapy
 class ProductSpider(scrapy.Spider):
     name = "products"
     nextp = 0
-    # brand = input('Enter the brand name you want to scrape: ')
 
     def start_requests(self):
         url = 'https://www.daraz.pk/catalog/'
@@ -30,5 +29,3 @@ class ProductSpider(scrapy.Spider):
 
         if (self.nextp != 3):
             yield response.follow(nextpage, callback=self.parse)
-            # nextpage = response.urljoin(nextpage)
-            # yield scrapy.Request(nextpage, callback=self.parse)
