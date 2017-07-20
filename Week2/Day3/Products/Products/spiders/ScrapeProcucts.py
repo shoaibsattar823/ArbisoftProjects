@@ -22,10 +22,9 @@ class ProductSpider(scrapy.Spider):
                 'price(PKR)': prod.css('span.price span'
                                        '::attr(data-price)').extract_first(),
             }
+
         nextpage = response.css('section.pagination [title=Next]'
                                 '::attr(href)').extract_first()
-
         self.nextp = self.nextp + 1
-
         if (self.nextp != 3):
             yield response.follow(nextpage, callback=self.parse)
