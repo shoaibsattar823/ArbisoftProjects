@@ -21,11 +21,29 @@ class LoginSpider(scrapy.Spider):
 
     def afterLogin(self, response):
         # print response.body
+        # cookie = response.headers.getlist(
+        #                                  'Set-Cookie'
+        #                                  )[0].split(";")[0].split("=")
+        # print('*****Cookie*****', cookie)
         if 'Invalid login' in response.body:
             self.logger.error('Login Failed')
             return
         links = response.xpath('//div[@id="linkNav"]/ul/li')
+        cookie = response.headers
+        print cookie
         for link in links:
             link1 = link.xpath('./a/@href').extract_first()
-            # item = siteItem()
             print('***LINK*** %s' % link1)
+            item = siteItem()
+            if link1 != '#' and link1 != 'javascript:;':
+                yield scrapy.Request(link1, self.parse_inside,
+                                     meta={'item': item})
+
+    def parse_inside(self, response):
+        # print('Response over here: ', response.text)
+        item = response.meta['item']
+        item['title'] = response.xpath('//div[@id="content"]'
+                                       '/div/div/div/div/div'
+                                       '/h2'
+                                       )
+        return item
