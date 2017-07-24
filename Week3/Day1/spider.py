@@ -1,5 +1,7 @@
 import requests
 
+import csv
+
 
 class Spider:
 
@@ -11,8 +13,12 @@ class Spider:
 
     def save_output(self, result, outfile):
         f = open(outfile, 'w')
-        for r in result:
-            f.write(str(r)+'\n')
+        if 'txt' in outfile:
+            for r in result:
+                f.write(str(r)+'\n')
+        elif 'csv' in outfile:
+            writer = csv.writer(f, delimiter=',')
+            writer.writerows(result)
         f.close()
 
     def parse(self):
