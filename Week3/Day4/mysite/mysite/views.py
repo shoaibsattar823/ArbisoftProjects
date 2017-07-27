@@ -4,8 +4,6 @@ from django.shortcuts import render
 
 import datetime
 
-from books.models import Book
-
 
 def hello(request):
     return HttpResponse("Hello WORLD")
@@ -25,8 +23,3 @@ def hours_ahead(request, offset):
     return render(request, 'hours_ahead.html', {'offset': offset,
                                                 'dt': dt,
                                                 })
-
-
-def book_list(request):
-    mybooks = Book.objects.all()
-    return render(request, 'book_list.html', {'mybooks': mybooks})

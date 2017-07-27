@@ -16,15 +16,13 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from mysite.views import hello
-from mysite.views import current_datetime
-from mysite.views import hours_ahead
-from mysite.views import book_list
+from books import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^hello/$', hello),
-    url(r'^time/$', current_datetime),
-    url(r'^time/plus/(\d{1,2})/$', hours_ahead),
-    url(r'^books/$', book_list),
+    # url(r'^hello/$', views.hello),
+    # url(r'^time/$', views.current_datetime),
+    # url(r'^time/plus/(\d{1,2})/$', views.hours_ahead),
+    url(r'^books/$', views.book_list),
+    url(r'^books/detail/([0-9+])/$', views.book_detail),
 ]
