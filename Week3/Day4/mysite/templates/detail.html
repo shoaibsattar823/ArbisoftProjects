@@ -11,10 +11,12 @@
   <tr>
     <td>{{ book.title }}</td>
     <td>
-      {{ book.authors }}
+      {% for author in book.authors.all %}
+      {{ author }}
+      {% endfor %}
     </td>
     <td>{{ book.publisher }}</td>
-    <td>{{ publication_date }}</td>
+    <td>{{ book.publication_date }}</td>
   </tr>
 </table>
 {% endblock %}

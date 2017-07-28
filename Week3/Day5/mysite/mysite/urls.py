@@ -14,18 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
-from django.conf.urls import include
 from django.contrib import admin
+from myapp import views
 
-from books import views
-
+app_name = 'polls'
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    # url(r'^hello/$', views.hello),
-    # url(r'^time/$', views.current_datetime),
-    # url(r'^time/plus/(\d{1,2})/$', views.hours_ahead),
-    url(r'^books/$', views.book_list),
-    url(r'^books/detail/([0-9+])/$', views.book_detail),
-    url(r'^form/$', views.get_name),
-    url(r'^', include('books.urls')),
+    url(r'^$', views.index, name='index'),
+    url(r'^(?P<question_id>[0-9]+)/$', views.detail, name='detail'),
+    url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),
 ]
