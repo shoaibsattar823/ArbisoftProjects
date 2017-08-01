@@ -5,16 +5,21 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 from .models import Book
 # from .models import Publisher
 # from .models import Author
+from .forms import BookForm
 
 
-# Create your views here.
+def home_view(request):
+    books = Book.objects.all()
+    return render(request, 'books/index.html', {'books': books})
+
+
 def login_form(request):
-    # print '*****Reached over here*****'
     return render(request, 'books/login_form.html')
 
 
@@ -34,16 +39,26 @@ def login_result(request):
 
 def logout_view(request):
     logout(request)
-    return HttpResponse('You are now logout from the website.')
+    return HttpResponseRedirect('/')
 
 
+@login_required(login_url='/login/')
 def book_list(request):
-    # if not request.user.is_authenticated:
-    #    return render(request, 'books/login_error.html')
     myBooks = Book.objects.all()
     return render(request, 'books/book_list.html', {'books': myBooks})
 
 
+@login_required(login_url='/login/')
 def book_detail(request, book_id):
     book = Book.objects.get(id=book_id)
     return render(request, 'books/detail.html', {'book': book})
+
+
+def get_bookTitle(request):
+    if request.method == 'POST':
+        form = BookForm(request.POST)
+        if form.is_valid():
+            return HttpResponse(form.cleaned_data['bookTitle'])
+    else:
+        form = BookForm()
+    return render(request, 'books/book.html', {'form': form})
