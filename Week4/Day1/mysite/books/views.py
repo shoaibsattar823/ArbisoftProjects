@@ -60,12 +60,11 @@ def get_bookResponse(request):
     if request.method == 'POST':
         form = BookForm(request.POST)
         if form.is_valid():
-            print form.cleaned_data
             publisher = Publisher.objects.get(name="O'Reilly")
             b = Book(title=form.cleaned_data['bookTitle'],
                      publisher=publisher)
             b.save()
-            b.authors.add(Author.objects.get(pk=1))
+            b.authors = form.cleaned_data['bookAuthors']
             return HttpResponseRedirect('/')
     else:
         form = BookForm()

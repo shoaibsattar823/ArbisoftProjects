@@ -3,7 +3,9 @@
 {% block content %}
     <p>You can also <a href='/book-title/'>Add</a> a book</p>
     <table>
+    <div class='breadcrumbs'>
     <tr><th>Books</th></tr>
+    </div>
     {% for book in books%}
     <tr>
       <td><a href='/detail/{{ book.id }}'>{{ book }}</a></td>

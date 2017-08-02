@@ -11,6 +11,4 @@ class BookForm(forms.Form):
     choice = (('Author 1', auths[0]), ('Author 2', auths[1]),
               ('Author 3', auths[2]))
     bookTitle = forms.CharField(label='Book Title', max_length=100)
-    bookAuthors = forms.ChoiceField(choices=choice, label='Book Authors')
-    '''bookPublisher = forms.ForeignKey(Publisher, label='Publisher')
-    bookPubDate = forms.DateField(label='Publication Date')'''
+    bookAuthors = forms.ModelMultipleChoiceField(queryset=Author.objects.all())
