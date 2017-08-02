@@ -1,5 +1,8 @@
 <form action='/book-title/' method='post'>
   {% csrf_token %}
-  {{ form }}
+  <label for='id_bookTitle'>Book Title:</label>
+  {{ form.bookTitle }}
   <input type='submit', value='Add'>
+  <label for='id_bookAuthors'>Select Author:</label>
+  {{ form.bookAuthors }}
 </form>
