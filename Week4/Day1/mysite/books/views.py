@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import datetime
-
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -11,8 +9,6 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 from .models import Book
-from .models import Publisher
-from .models import Author
 from .forms import BookForm
 
 
@@ -56,15 +52,11 @@ def book_detail(request, book_id):
     return render(request, 'books/detail.html', {'book': book})
 
 
-def get_bookResponse(request):
+def get_BookForm(request):
     if request.method == 'POST':
         form = BookForm(request.POST)
         if form.is_valid():
-            publisher = Publisher.objects.get(name="O'Reilly")
-            b = Book(title=form.cleaned_data['bookTitle'],
-                     publisher=publisher)
-            b.save()
-            b.authors = form.cleaned_data['bookAuthors']
+            form.save()
             return HttpResponseRedirect('/')
     else:
         form = BookForm()

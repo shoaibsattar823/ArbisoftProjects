@@ -10,5 +10,5 @@ urlpatterns = [
     # url(r'^login-result/detail/([0-9+])/$', views.book_detail),
     url(r'^detail/([0-9]+)/$', views.book_detail),
     url(r'^logout/$', views.logout_view),
-    url(r'^book-title/$', views.get_bookResponse),
+    url(r'^book-title/$', views.get_BookForm),
 ]

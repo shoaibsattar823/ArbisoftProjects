@@ -1,14 +1,27 @@
-from django import forms
-from .models import Author
-# from .models import Publisher
+from django.forms import ModelForm
+# from django.core.exceptions import NON_FIELD_ERRORS
+from .models import Author, Publisher, Book
 
 
-class BookForm(forms.Form):
-    authors = Author.objects.all()
-    auths = []
-    for i in range(0, len(authors)):
-        auths.append(str(authors[i]))
-    choice = (('Author 1', auths[0]), ('Author 2', auths[1]),
-              ('Author 3', auths[2]))
-    bookTitle = forms.CharField(label='Book Title', max_length=100)
-    bookAuthors = forms.ModelMultipleChoiceField(queryset=Author.objects.all())
+class BookForm(ModelForm):
+    class Meta:
+        model = Book
+        fields = ['title', 'authors', 'publisher', 'publication_date']
+        '''error_messages = {
+            NON_FIELD_ERRORS: {
+                'unique_together': "%(Book)s's %(fields)s are not unique",
+            }
+        }'''
+
+
+class AuthorForm(ModelForm):
+    class Meta:
+        model = Author
+        fields = ['first_name', 'last_name', 'email']
+
+
+class PublisherForm(ModelForm):
+    class Meta:
+        model = Publisher
+        fields = ['name', 'address', 'city', 'state_province',
+                  'country', 'website']
