@@ -2,7 +2,7 @@
 {% block title %}Books List{% endblock %}
 {% block content %}
   {% if user.username %}
-    <p>You can also <a href='/book-title/'>Add</a> a book</p>
+    <p>You can also <a href='/book-form/'>Add</a> a book</p>
     <table>
     <tr><th>Books</th></tr>
     {% for book in books%}
