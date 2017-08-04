@@ -1,6 +1,6 @@
-{% extends 'books/base.html' %}
-{% block title %}Book Form{% endblock %}
-{% block content %}
+{% include 'books/header.html'%}
+<title>Book Form</title>
+<div><h3>Fill the form to add a new book</h3></div>
 <form action='/book-form/' method='post'>
   {% csrf_token %}
   <div>
@@ -21,4 +21,4 @@
     {{ form.publication_date }}
   </div>
 </form>
-{% endblock %}
+{% include 'books/footer.html' %}
