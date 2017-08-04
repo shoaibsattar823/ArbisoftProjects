@@ -1,10 +1,15 @@
 {% extends 'books/base.html' %}
 {% block title %}Books List{% endblock %}
 {% block content %}
+  {% if user.username %}
     <p>You can also <a href='/book-form/'>Add</a> a book</p>
     <h2>Books</h2>
     <ul>
     {% for book in books_list%}
-      <li><a href='/detail/{{ book.pk }}/'>{{ book }}<a></li>
+      <li><a href='/detail/{{ book.pk }}/'>{{ book }}</a></li>
     {% endfor %}
+  {% else %}
+  <p>Welcome to Books Site</p>
+  <p>You need to <a href='/login/'>login</a> to visit this site.</p>
+  {% endif %}
 {% endblock %}

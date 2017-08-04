@@ -1,7 +1,8 @@
 {% extends 'books/base.html' %}
+{% block title %}Book Detail{% endblock %}
 {% block content %}
-      <h3>Book Title: {{ object.title }}</h3>
-      <p>Authors:
+      <p>Book Title: {{ object.title }}</p>
+      <p>Author(s):
         {% for author in object.authors.all %}
         {{ author }}
         {% endfor %}

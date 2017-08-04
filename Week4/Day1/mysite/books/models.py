@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 import datetime
 from django.db import models
-# Create your models here.
+# from django.urls import reverse
 
 
 class Publisher(models.Model):
@@ -36,6 +36,9 @@ class Book(models.Model):
     publisher = models.ForeignKey(Publisher)
     publication_date = models.DateField(default=datetime.date.today,
                                         blank=True)
+
+    def get_absolute_url(self):
+        return '/'
 
     def __str__(self):
         return self.title

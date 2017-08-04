@@ -3,16 +3,13 @@
 {% block content %}
   {% if user.username %}
     <p>You can also <a href='/book-form/'>Add</a> a book</p>
-    <table>
-    <tr><th>Books</th></tr>
-    {% for book in books%}
-    <tr>
-      <td><a href='/detail/{{ book.id }}'>{{ book }}</a></td>
-    </tr>
+    <h2>Books</h2>
+    <ul>
+    {% for book in books_list%}
+      <li><a href='/detail/{{ book.pk }}/'>{{ book }}</a></li>
     {% endfor %}
-  </table>
   {% else %}
-    <p>Welcome to Books Site</p>
-    <p>You need to <a href='/login/'>login</a> to visit this site.</p>
+  <p>Welcome to Books Site</p>
+  <p>You need to <a href='/login/'>login</a> to visit this site.</p>
   {% endif %}
 {% endblock %}

@@ -1,3 +1,6 @@
+{% extends 'books/base.html' %}
+{% block title %}Book Form{% endblock %}
+{% block content %}
 <form action='/book-form/' method='post'>
   {% csrf_token %}
   <div>
@@ -18,3 +21,4 @@
     {{ form.publication_date }}
   </div>
 </form>
+{% endblock %}
