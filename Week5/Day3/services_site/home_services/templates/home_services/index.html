@@ -1,0 +1,16 @@
+{% extends 'home_services/base.html' %}
+{% block title %}{% endblock %}
+{% block content %}
+<div>
+  <h3>Available Services</h3>
+  {% for service in services %}
+    <table>
+    <tr>
+      <td>{{ service }}</td>
+    </tr>
+    </table>
+  {% endfor %}
+  <h3>Request a Service</h3>
+  <p><a href='/new-request/'>New Request</a></p>
+</div>
+{% endblock %}

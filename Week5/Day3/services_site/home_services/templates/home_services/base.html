@@ -1,0 +1,16 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+  <head>
+    <title>Base Page</title>
+  </head>
+  <body>
+    <h2>Home Services Web Portal</h2>
+    {% if user.username %}
+    <div><p><a href="/logout/">Logout</a></p></div>
+    {% block content %}{% endblock %}
+    {% else %}
+    <p>Please <a href="/login/">Login</a> to visit this site</p>
+    <p><a href="/register/">Register</a> if not have an account</p>
+    {% endif %}
+  </body>
+</html>

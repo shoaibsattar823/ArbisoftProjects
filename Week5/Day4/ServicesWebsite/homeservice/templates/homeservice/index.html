@@ -1,0 +1,25 @@
+{% extends 'homeservice/base.html' %}
+{% block title %}<title>Home Page</title>{% endblock %}
+{% block content %}
+  <div>
+    <h3>Home Services List</h3>
+    {% for service in services %}
+    <div>{{ service }}</div>
+    {% endfor %}
+  </div>
+  <div>
+    <p><a href='/request/'>New Request</a><p>
+    {% comment %}
+    <h3>New Request</h3>
+    {{ form.as_p }}
+    {% include 'homeservice/newrequest.html' %}
+    {% endcomment %}
+  </div>
+  <div>
+    <h3>My Requests [ <a href='/requests-detail/'>Details</a> ]</h3>
+    {% for r in requests %}
+    <div>{{ r }}</div>
+    {% endfor %}
+    {% comment %}make a view for order/service{% endcomment %}
+  </div>
+{% endblock %}
