@@ -4,7 +4,7 @@
 <p>Book Title: {{ object.title }}</p>
 <p>Author(s):
   {% for author in object.authors.all %}
-  {{ author }}
+  {{ author }},
   {% endfor %}
 </p>
 <p>Publisher: {{ object.publisher }}</p>
