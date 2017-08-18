@@ -1,0 +1,11 @@
+{% extends 'homeservice/base.html'%}
+{% block content %}
+{% block title %}<title>Details Page</title>{% endblock %}
+{% for req in requests %}
+  <p>
+  {% for det in req %}
+  {{ det }},
+  {% endfor %}
+  </p>
+{% endfor %}
+{% endblock %}
