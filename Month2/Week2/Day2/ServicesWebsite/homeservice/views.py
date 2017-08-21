@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import datetime
+import json
 
 from django.shortcuts import render
 from django.views import View
@@ -9,7 +10,7 @@ from django.views.generic import ListView, TemplateView
 from django.views.generic.edit import FormView
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
-from django.http import HttpResponseRedirect  # , HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse
 
 from homeservice.forms import RegisterForm, RequestForm
 from homeservice.models import Service, Order, Customer
@@ -67,6 +68,27 @@ class RequestDetail(View):
                     for r in requests]
         return render(request, 'homeservice/request_detail.html',
                       {'requests': requests})
+
+
+class JsonDetail(View):
+    def get(self, request):
+        requests = Order.objects.filter(ordered_by=str(self.request.user))
+        requests = [[r.ordered_service, r.ordered_date, r.status]
+                    for r in requests]
+        req_json_format = []
+        for r in requests:
+            req_json_format.append({
+                            'Service': str(r[0]),
+                            'Date': str(r[1]),
+                            'Status': r[2]
+                            })
+        """
+        I have created a list of dict of the orders of a specific customer in
+        above loop then converted it
+        to json format in the below line
+        """
+        req_json_format = json.dumps(req_json_format)
+        return HttpResponse(req_json_format)
 
 
 class RegisterUser(FormView):

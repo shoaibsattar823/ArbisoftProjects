@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^logout/$', views.logout_view),
     url(r'^request/$', views.NewRequest.as_view()),
     url(r'^requests-detail/$', views.RequestDetail.as_view()),
+    url(r'^requests-detail/json/$', views.JsonDetail.as_view()),
 ]
