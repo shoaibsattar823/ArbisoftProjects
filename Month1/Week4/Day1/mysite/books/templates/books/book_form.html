@@ -1,0 +1,24 @@
+{% include 'books/header.html'%}
+<title>Book Form</title>
+<div><h3>Fill the form to add a new book</h3></div>
+<form action='/book-form/' method='post'>
+  {% csrf_token %}
+  <div>
+    <label for='id_title'>Book Title:</label>
+    {{ form.title }}
+    <input type='submit', value='Add'>
+  </div>
+  <div>
+    <label for='id_authors'>Select author(s):</label>
+    {{ form.authors}}
+  </div>
+  <div>
+    <label for='id_publisher'>Publisher:</label>
+    {{ form.publisher }}
+  </div>
+  <div>
+    <label for='id_publication_date'>Publication Date</label>
+    {{ form.publication_date }}
+  </div>
+</form>
+{% include 'books/footer.html' %}
