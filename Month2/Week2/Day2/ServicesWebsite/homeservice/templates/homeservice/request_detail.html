@@ -1,0 +1,14 @@
+{% extends 'homeservice/base.html'%}
+{% block content %}
+{% block title %}<title>Details Page</title>{% endblock %}
+
+<a href='json'>Data in JSON Format</a>
+{% for req in requests %}
+  <p>
+  {% for det in req %}
+  {{ det }},
+  {% endfor %}
+  </p>
+{% endfor %}
+
+{% endblock %}

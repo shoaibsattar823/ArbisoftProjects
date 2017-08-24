@@ -1,0 +1,26 @@
+
+{% block content %}
+<title>Register</title>
+<form method='post' action='/register/'>
+  {% csrf_token %}
+  <div>
+    <label for='id_username'>Username: </label>
+    {{ form.username }}
+  </div>
+  <div>
+    <label for=''>Email:</label>
+    {{ form.email }}
+  </div>
+  <div>
+    <label for=''>Password: </label>
+    {{ form.password1 }}
+  </div>
+  <div>
+    <label for=''>Confirm Password: </label>
+    {{ form.password2 }}
+  </div>
+  <div>
+    <input type='submit', value='Register'>
+  </div>
+</form>
+{% endblock %}
