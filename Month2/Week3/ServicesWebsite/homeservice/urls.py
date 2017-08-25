@@ -11,9 +11,10 @@ urlpatterns = [
     url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view(),
         name='user-detail'),
     url(r'^customers/$', views.CustomerList.as_view(), name='customer-list'),
-    url(r'^customers/(?P<pk>[0-9]+)/$', views.CustomerDetail.as_view(),
+    url(r'^customers/(?P<username>[a-z]+[0-9]*)/$',
+        views.CustomerDetail.as_view(),
         name='customer-detail'),
-    url(r'^orders/$', views.OrderList.as_view(), name='order-list')
+    url(r'^orders/$', views.OrderList.as_view(), name='order-list'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

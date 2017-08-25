@@ -42,6 +42,7 @@ class CustomerList(generics.ListCreateAPIView):
 
 class CustomerDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Customer.objects.all()
+    lookup_field = 'username'
     serializer_class = CustomerSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
@@ -50,3 +51,10 @@ class OrderList(generics.ListCreateAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+
+# Issue with order detail because of multiple orders having same pk
+'''class OrderDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)'''
