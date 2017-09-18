@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+  <script src="data.txt"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+	<script>
+		$(document).ready(function() {
+			$("#btn").click(function() {
+				$("#test").load("/data.txt");
+			});
+		});
+	</script>
+</head>
+<div></div>
+<title>Register</title>
+<style type="text/css">
+    .container {
+        width: 150px;
+        clear: both;
+    }
+    .container input {
+        width: 100%;
+        clear: both;
+    }
+</style>
+<div class="container">
+<form method='post' action=''>
+  {% csrf_token %}
+  <div>
+    <label for='uname'>Username: </label>
+    <input id='uname'>
+     <p id="testuser" style='color:red;'></p>
+  </div>
+  <div>
+    <label for='uemail'>Email:</label>
+    <input id='uemail'>
+    <p id='testemail' style='color:red;'></p>
+  </div>
+  <div>
+    <label for='upassword'>Password: </label>
+    <input id='upassword'>
+    <p id='testpass' style='color:red;'></p>
+  </div>
+  <div>
+    <label for='upassword2'>Confirm Password: </label>
+    <input id='upassword2'>
+    <p id='testpass2' style='color:red;'></p>
+  </div>
+  <div>
+    <input id='id_register' type='submit', value='Register'>
+  </div>
+</form>
+<div>
+<button id='btn'>Click for More</button>
+<div id='more'></div>
+</div>
+</div>
+<body>
+
+<div id="test">
+	<p>This is the first content!</p>
+</div>
+<button id="btn">Click to change</button>
+
+<script>
+$(document).ready(function(){
+	$('#uname').on('input', function(){
+		var input = $(this);
+		var is_name = input.val();
+		if (is_name){
+			input.removeClass('invalid').addClass('valid');
+			console.log("Valid input");
+		}
+		else{
+			input.removeClass('valid').addClass('invalid');
+			console.log("InValid input");
+		}
+	});
+});
+
+</script>
+
+</body>
+</html>

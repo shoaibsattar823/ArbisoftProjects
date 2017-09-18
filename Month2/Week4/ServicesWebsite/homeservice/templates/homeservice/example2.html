@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Validate Input</h2>
+
+
+<img src="https://www.fineinvitepapers.com/images/CS196-01.png" border=3>
+
+<div></div>
+<title>Register</title>
+<style type="text/css">
+    .container {
+        width: 150px;
+        clear: both;
+    }
+    .container input {
+        width: 100%;
+        clear: both;
+    }
+    .errorcolor input {
+      border-color: 'red';
+    }
+</style>
+<div class="container">
+<form method='post' action=''>
+  {% csrf_token %}
+  <div>
+    <label for='uname'>Username: </label>
+    <input id='uname'>
+     <p id="testuser" style='color:red;'></p>
+  </div>
+  <div>
+    <label for='uemail'>Email:</label>
+    <input id='uemail'>
+    <p id='testemail' style='color:red;'></p>
+  </div>
+  <div>
+    <label for='upassword'>Password: </label>
+    <input id='upassword'>
+    <p id='testpass' style='color:red;'></p>
+  </div>
+  <div>
+    <label for='upassword2'>Confirm Password: </label>
+    <input id='upassword2'>
+    <p id='testpass2' style='color:red;'></p>
+  </div>
+  <div>
+    <input id='id_register' type='submit', value='Register'>
+  </div>
+</form>
+<div><p></p></div>
+<div>
+<button id='btn'>Click for More</button>
+<div id='more'></div>
+</div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script>
+$('#btn').on('click', function(){
+  $.ajax({
+    url: '/example/data/',
+    // data: 'data.txt',
+    success: function(data){
+      console.log(data.data);
+      $('#more').html(data.data);
+    }
+  });
+});
+
+$(document).ready(function(){
+
+  $('img').hover(function(){
+    console.log("inside the image");
+  }, function(){
+    console.log("outside the image");
+  });
+
+  function checkEmpty(el,el2, evt){
+    if (el.val() === ''){
+      console.log("in here");
+      el.css('border-color', 'red');
+      el2.html('This field should not be empty!');
+      evt.preventDefault(evt);
+    }
+    else{
+      console.log("key pressed!");
+      el.css('border-color', '');
+      el2.html('')
+    }
+  }
+  $('#id_register').on('click', function(evt){
+    var uname, email, pass, pass2, text;
+    uname = $('#uname');
+    email = $('#uemail');
+    pass = $('#upassword');
+    pass2 = $('#upassword2');
+
+    uname.keypress(checkEmpty(uname, $('#testuser'), evt));
+    email.keypress(checkEmpty(email, $('#testemail'), evt));
+    pass.keypress(checkEmpty(pass, $('#testpass'), evt));
+    pass2.keypress(checkEmpty(pass2, $('#testpass2'), evt));
+
+  })
+});
+
+
+</script>
+
+
+</body>
+</html>
