@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 
 
 function FetchBlogsList(props) {
+  console.log('reached inside fetch_blogs_list container');
   props.fetchBlogs();
   return null;
 }

@@ -22,6 +22,7 @@ export function fetchBlogs(){
 
 
 export function fetchBlogDetail(title) {
+  console.log('Inside fetchBlogDetail -- actions');
   const url = `${ROOT_URL}/blogs/${title}/?format=json`;
   const request = axios.get(url);
   return {

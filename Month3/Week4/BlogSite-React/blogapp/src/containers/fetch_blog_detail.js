@@ -1,17 +1,13 @@
-import { fetchBlogDetail } from '../actions/index';
+import {fetchBlogDetail} from '../actions/index';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-
-
-function FetchBlogDetail(props) {
-  console.log(props.title);
-  const data = props.fetchBlogDetail(props.title);
+function FetchBlogDetail(props){
+  console.log('here: ', props);
   return null;
 }
 
 function mapDispatchToProps(dispatch){
-  console.log('here???');
   return bindActionCreators({fetchBlogDetail}, dispatch);
 }
 
