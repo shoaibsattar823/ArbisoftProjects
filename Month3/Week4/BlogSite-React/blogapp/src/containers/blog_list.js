@@ -1,32 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import {fetchBlogDetail} from '../actions/index';
-// import {bindActionCreators} from 'redux';
+import FetchBlogDetail from './fetch_blog_detail';
 import BlogDetail from './blog_detail';
-// import BlogDetail from '../components/blog_detail';
+import AddBlog from './add_blog';
+
 
 class BlogsList extends Component {
   constructor() {
     super();
     this.state = {
       title: '',
-      click: false,
     }
-
     this.showDetails = this.showDetails.bind(this);
   }
-
 
   showDetails(event) {
     event.preventDefault();
     const title = event.target.innerText;
-    console.log('Title: ', title);
-    console.log('Props.BLOGS: ', this.props.blogs);
-    console.log('Props.Title: ', this.props.title);
     this.setState({title: title});
-    const detail = fetchBlogDetail(title);
-    console.log('Detail: ', detail.payload);
   }
 
 
@@ -47,24 +39,19 @@ class BlogsList extends Component {
   }
 
   render() {
-    console.log('reached inside blog_list container');
     return (
       <div>
         <div className="container-fluid">
           <h3>Blogs List</h3>
           { this.renderBlogs(this.props.blogs) }
-          <BlogDetail  />
+          <FetchBlogDetail title={this.state.title}/>
+          <BlogDetail />
         </div>
+        <AddBlog />
       </div>
     );
   }
 }
-
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({fetchBlogDetail}, dispatch);
-// }
-//
-// connect(mapDispatchToProps)(BlogsList);
 
 function mapStateToProps({blogs}) {
   return { blogs};

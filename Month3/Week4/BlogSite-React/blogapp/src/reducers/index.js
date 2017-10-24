@@ -4,7 +4,7 @@ import BlogDetailReducer from './reducer_blog_detail';
 
 const rootReducer = combineReducers({
   blogs: BlogReducer,
-  title: BlogDetailReducer
+  blog: BlogDetailReducer
 });
 
 export default rootReducer;

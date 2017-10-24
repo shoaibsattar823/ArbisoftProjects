@@ -20,11 +20,21 @@ class Blogger(models.Model):
 
 
 class Blog(models.Model):
+    bloggerObjs = Blogger.objects.all()
+    bloggerNames = ()
+    for b in bloggerObjs:
+        bloggerNames += ((b.first_name, b.first_name+' '+b.last_name), )
+
     title = models.CharField(max_length=100, unique=True, default='')
     post = models.TextField(default='')
     published_date = models.DateField(default=datetime.now)
-    blogger = models.ForeignKey(Blogger, default='',
-                                on_delete=models.CASCADE)
+    # blogger = models.ForeignKey(Blogger, default='',
+    #                             on_delete=models.CASCADE)
+    blogger = models.CharField(max_length=100, choices=bloggerNames)
+
+    def save(self, force_insert=False, force_update=False, *args, **kwargs):
+        if(self.blogger not in [str(n[1]).strip() for n in self.bloggerNames]):
+            raise Exception('Name not in the list of Bloggers')
 
     def __str__(self):
         return self.title
@@ -39,14 +49,3 @@ def create_blogger_profile(sender, **kwargs):
         print(kwargs['instance'])
         Blogger.objects.create(username=u1,
                                first_name=kwargs['instance'])
-
-
-# class BlogPost(models.Model):
-#     posted_by = models.ForeignKey(Blogger,
-#                                   to_field='username',
-#                                   db_column='username',
-#                                   on_delete=models.CASCADE)
-#     posted_blog = models.ForeignKey(Blog,
-#                                     to_field='title',
-#                                     db_column='title',
-#                                     on_delete=models.CASCADE)

@@ -8,7 +8,7 @@ from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.reverse import reverse
 from rest_framework.response import Response
-
+from rest_framework import permissions
 from .models import Blog, Blogger
 from .serializers import BlogSerializer, BloggerSerializer
 # from .forms import BlogForm
@@ -25,17 +25,20 @@ def api_root(request, format=None):
 class BlogsList(generics.ListCreateAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
 class BlogDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Blog.objects.all()
     lookup_field = 'title'
     serializer_class = BlogSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
 class BloggersList(generics.ListCreateAPIView):
     queryset = Blogger.objects.all()
     serializer_class = BloggerSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
 # def new_blog(request):
