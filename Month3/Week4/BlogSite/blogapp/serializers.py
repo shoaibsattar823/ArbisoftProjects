@@ -1,8 +1,14 @@
 from rest_framework import serializers
 
+from django.contrib.auth.models import User
+
 from .models import Blog, Blogger
 
-# tempBloggers = []
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username', 'password', 'email')
 
 
 class BloggerSerializer(serializers.ModelSerializer):
@@ -15,18 +21,7 @@ class BloggerSerializer(serializers.ModelSerializer):
 
 
 class BlogSerializer(serializers.HyperlinkedModelSerializer):
-    # blogger = serializers.SlugRelatedField(read_only=True,
-    #                                       slug_field='first_name')
-    # blogger = BloggerSerializer()
-    # bloggers = serializers.SerializerMethodField('get_blogger_options')
 
     class Meta:
         model = Blog
         fields = ('title', 'post', 'published_date', 'blogger')
-
-    # def get_blogger_options(self, obj):
-    #     global tempBloggers
-    #     if (obj.blogger.first_name not in tempBloggers):
-    #         tempBloggers.append(obj.blogger.first_name)
-    #     print tempBloggers
-    #     return tempBloggers

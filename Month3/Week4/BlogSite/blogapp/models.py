@@ -8,6 +8,8 @@ from django.db.models.signals import post_save
 
 from datetime import datetime
 
+from rest_framework.authtoken.models import Token
+
 
 class Blogger(models.Model):
     username = models.OneToOneField(User, default='')
@@ -35,9 +37,16 @@ class Blog(models.Model):
     def save(self, force_insert=False, force_update=False, *args, **kwargs):
         if(self.blogger not in [str(n[1]).strip() for n in self.bloggerNames]):
             raise Exception('Name not in the list of Bloggers')
+        super(Blog, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title
+
+
+@receiver(post_save, sender=User)
+def init_new_user(sender, instance, signal, created, **kwargs):
+    if created:
+        Token.objects.create(user=instance)
 
 
 @receiver(post_save, sender=User)
