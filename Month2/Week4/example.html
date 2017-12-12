@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Can Validate Input</h2>
+
+<p>Please input a number between 1 and 10:</p>
+
+<img src="https://www.fineinvitepapers.com/images/CS196-01.png" border=3>
+
+<div></div>
+
+<input id="numb">
+
+<button type="button">Submit</button>
+
+<p id="demo"></p>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script>
+$('img').hover(function(){
+  console.log("inside the image");
+}, function(){
+  console.log("outside the image");
+})
+
+$('button').on('click', function(){
+  var x, text;
+
+  // Get the value of the input field with id="numb"
+  x = document.getElementById("numb").value;
+
+  // If x is Not a Number or less than one or greater than 10
+  if (isNaN(x) || x < 1 || x > 10) {
+      text = "Input not valid";
+  } else {
+      text = "Input OK";
+  }
+  document.getElementById("demo").innerHTML = text;
+})
+
+/*function myFunction() {
+    var x, text;
+
+    // Get the value of the input field with id="numb"
+    x = document.getElementById("numb").value;
+
+    // If x is Not a Number or less than one or greater than 10
+    if (isNaN(x) || x < 1 || x > 10) {
+        text = "Input not valid";
+    } else {
+        text = "Input OK";
+    }
+    document.getElementById("demo").innerHTML = text;
+}*/
+</script>
+
+</body>
+</html>
